@@ -1,145 +1,42 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
-    <title>Stroke Prediction</title>
-</head>
-
-<body>
-    <div class="alert alert-success alert-dismissible fade show text-center mb-0" role="alert">
-        <strong>Welcome to Stroke Prediction machine</strong> 
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand text-warning" href="#">Stroke Prediction</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                    
-                    
-
-                </ul>
-
-                
-            </div>
-        </div>
-    </nav>
+import streamlit as st
 
 
-      <div class="container">
-        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-            <h2 class="fw-normal">Fill this form to predict Heart stroke.</h2>
+def run():
+    st.title("Heart Stroke Prediction Using Machine Learning")
+    st.markdown(
+        '<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">',
+        unsafe_allow_html=True)
 
-            <p class="text-danger"><b>{{prediction}}</b></p>
-        </div>
-        <div class="container">
-            <form >
-                <div class="mb-3">
-                    <label for="exampleInputPassword1"  class="form-label">Gender</label>
-                    <select class="form-select" id="gender" name="gender" aria-label="Default select example">
-                        <option selected>-- select gender --</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Enter age</label>
-                    <input type="text" class="form-control" id="age" name="age" placeholder="Age">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1"  class="form-label">Hypertension</label>
-                    <select class="form-select" id="hypertension" name="hypertension" aria-label="Default select example">
-                        <option selected>-- select Hypertension --</option>
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1"  class="form-label">Heart Disease</label>
-                    <select class="form-select" id="disease" name="disease" aria-label="Default select example">
-                        <option selected>-- select Heart Disease --</option>
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1"  class="form-label">Marrital status</label>
-                    <select class="form-select" id="married" name="married" aria-label="Default select example">
-                        <option selected>--select marrital status --</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1"  class="form-label">work type</label>
-                    <select class="form-select" id="work" name="work" aria-label="Default select example">
-                        <option selected>-- select work type --</option>
-                        <option value="Self-employed">Self-employed</option>
-                        <option value="Private">Private</option>
-                        <option value="children">children</option>
-                        <option value="Govt_job">Government Job</option>
-                        <option value="Never_worked">Never_worked</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1"  class="form-label">Residence Type</label>
-                    <select class="form-select" id="residence" name="residence" aria-label="Default select example">
-                        <option selected>-- Select residence type --</option>
-                        <option value="Urban">Urban</option>
-                        <option value="Rural">Rural</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Enter average glucose level</label>
-                    <input type="text" class="form-control" id="glucose" name="glucose" placeholder="Average Glucose level">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Enter Body Mass Index (BMI)</label>
-                    <input type="text" class="form-control" id="bmi" name="bmi" placeholder="Body Mass Index (BMI)">
-                </div>               
-                <div class="mb-3">
-                    <label for="exampleInputPassword1"  class="form-label">Smoking status</label>
-                    <select class="form-select" id="smoking" name="smoking" aria-label="Default select example">
-                        <option selected value="Unknown">-- Select smoking status if unknown --</option>
-                        <option value="never smoked">never smoked</option>
-                        <option value="formerly smoked">formerly smoked</option>
-                        <option value="smokes">smokes</option>
-                    </select>
-                </div>
-                <div class="text-center"><button type="submit" class="btn btn-primary">Submit</button></div>
-            </form>
-         
-        </div><br><br>
-        <br> <br> <br> <br> </div>
+    gen_display = ('Female', 'Male')
+    gen_options = list(range(len(gen_display)))
+    gen = st.selectbox("Gender", gen_options, format_func=lambda x: gen_display[x])
 
 
-    <!-- Optional JavaScript; choose one of the two! -->
+    age = st.text_input('Age')
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-        crossorigin="anonymous"></script>
+    ht_display = ('No', 'Yes')
+    ht = st.selectbox("Hypertension", ht_display)
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-    -->
-</body>
+    hd_display = ('No', 'Yes')
+    hd = st.selectbox("Heart Disease", hd_display)
 
-</html>
+    mar_display = ('No', 'Yes')
+    mar = st.selectbox("Marital Status", mar_display)
+
+    wt_display = ('Private', 'Self-employed', 'Government Job', 'Children')
+    wt = st.selectbox("Work Type", wt_display)
+
+    rt_display = ('Urban', 'Rural')
+    rt = st.selectbox("Education", rt_display)
+
+    avg_gl = st.text_input('Average Glucose Level')
+
+    bmi = st.text_input('BMI')
+
+    ss_display = ('Formerly smoked', 'Never smoked', 'Smokes', 'Unknown')
+    ss = st.selectbox("Employment Status", ss_display)
+
+    submit_button = st.button('Submit')
+
+
+run()
